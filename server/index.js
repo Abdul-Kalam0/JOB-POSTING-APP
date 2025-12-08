@@ -6,7 +6,13 @@ dotenv.config();
 const app = express();
 
 //express middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "DELETE"],
+  })
+);
 app.use(express.json());
 
 import jobRoutes from "./routes/jobRoutes.js";
