@@ -87,6 +87,38 @@ export const getAllJobs = async (req, res) => {
   }
 };
 
+export const getJobById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid job ID.",
+      });
+    }
+
+    const job = await jobModel.findById(id);
+    if (!job) {
+      return res.status(404).json({
+        success: false,
+        message: "Job not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Job fetched successfully.",
+      data: job,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+      error: error.message,
+    });
+  }
+};
+
 export const deleteJobById = async (req, res) => {
   const { id } = req.params;
   try {
