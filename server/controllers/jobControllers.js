@@ -1,3 +1,4 @@
+import mongoose, { mongo } from "mongoose";
 import jobModel from "../models/jobModel.js";
 
 export const createJob = async (req, res) => {
@@ -76,6 +77,39 @@ export const getAllJobs = async (req, res) => {
       success: true,
       message: "Jobs fetched successfully.",
       data: jobs,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteJobById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid job ID.",
+      });
+    }
+
+    const deletedJob = await jobModel.findByIdAndDelete(id);
+
+    if (!deletedJob) {
+      return res.status(404).json({
+        success: false,
+        message: "Job not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Job deleted successfully.",
+      data: deletedJob,
     });
   } catch (error) {
     return res.status(500).json({
