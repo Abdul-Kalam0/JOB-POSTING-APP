@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 export const JobDetails = () => {
   const { jId } = useParams();
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/api/job/${jId}`
+    `https://job-posting-backend-001.vercel.app/api/job/${jId}`
   );
 
   if (loading) return <p className="text-center mt-4">Loading...</p>;

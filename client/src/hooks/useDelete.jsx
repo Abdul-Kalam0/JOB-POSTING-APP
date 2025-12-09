@@ -12,7 +12,7 @@ export const useDelete = () => {
     try {
       setLoading(true);
       const response = await axios.delete(
-        `http://localhost:3000/api/job/${id}`
+        `https://job-posting-backend-001.vercel.app/api/job/${id}`
       );
       setData(response.data);
       setError(null);

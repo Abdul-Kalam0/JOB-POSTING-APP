@@ -8,7 +8,8 @@ const app = express();
 //express middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin: "https://job-posting-app-001-vercel.app/",
     credentials: true,
     methods: ["GET", "POST", "DELETE"],
   })

@@ -47,7 +47,7 @@ export default function Form() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/jobs",
+        "https://job-posting-backend-001.vercel.app/api/jobs",
         formData
       );
 

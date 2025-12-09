@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 function App() {
   const { data, loading, error, fetchData } = useFetch(
-    "http://localhost:3000/api/jobs"
+    "https://job-posting-backend-001.vercel.app/api/jobs"
   );
 
   const { deleteData, loading: deleting } = useDelete();
