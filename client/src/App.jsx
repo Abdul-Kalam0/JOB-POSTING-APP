@@ -12,10 +12,11 @@ function App() {
     "https://job-posting-backend-001.vercel.app/api/jobs"
   );
 
-  const { deleteData, loading: deleting } = useDelete();
+  const { deleteData } = useDelete(); // Removed 'loading: deleting' since we're not using it globally anymore
 
   const [searchTerm, setSearchTerm] = useState("");
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const [deletingJobId, setDeletingJobId] = useState(null); // New state to track which job is being deleted
 
   const showToast = (message, type) => {
     setToast({ show: true, message, type });
@@ -23,12 +24,15 @@ function App() {
   };
 
   const handleDelete = async (jobId) => {
+    setDeletingJobId(jobId); // Set the deleting job ID to show loading on the specific button
     try {
       await deleteData(jobId);
       fetchData(); // refresh job list after delete
       showToast("Job deleted successfully!", "success");
     } catch (err) {
       showToast("Failed to delete job.", "error");
+    } finally {
+      setDeletingJobId(null); // Reset to null after deletion (success or failure)
     }
   };
 
@@ -86,9 +90,10 @@ function App() {
                       <button
                         onClick={() => handleDelete(job._id)}
                         className="btn btn-danger"
-                        disabled={deleting}
+                        disabled={deletingJobId === job._id} // Disable only if this job is being deleted
                       >
-                        {deleting ? "Deleting..." : "Delete"}
+                        {deletingJobId === job._id ? "Deleting..." : "Delete"}{" "}
+                        // Show "Deleting..." only for the specific job
                       </button>
                     </div>
                   </div>
