@@ -90,10 +90,9 @@ function App() {
                       <button
                         onClick={() => handleDelete(job._id)}
                         className="btn btn-danger"
-                        disabled={deletingJobId === job._id} // Disable only if this job is being deleted
+                        disabled={deletingJobId === job._id}
                       >
                         {deletingJobId === job._id ? "Deleting..." : "Delete"}{" "}
-                        // Show "Deleting..." only for the specific job
                       </button>
                     </div>
                   </div>
