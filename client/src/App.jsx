@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="container my-4" style={{ minHeight: "72vh" }}>
+      <main className="container my-4" style={{ minHeight: "74vh" }}>
         <h1 className="mt-4 text-center">All Jobs</h1>
 
         {/* Search Bar */}
