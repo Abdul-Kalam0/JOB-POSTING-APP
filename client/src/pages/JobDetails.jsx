@@ -15,7 +15,7 @@ export const JobDetails = () => {
   return (
     <>
       <Navbar />
-      <main className="container my-4">
+      <main className="container my-4" style={{ minHeight: "72vh" }}>
         <div className="row justify-content-center">
           <div className="col-12 col-md-8">
             <div className="card shadow">
